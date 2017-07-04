@@ -11,9 +11,13 @@ def login(request):
 def login_check(request):
     uname = request.POST.get('username')
     passwd = request.POST.get('pwd')
-    urow = UserInfo.objects.get(uname)
+
+    print(uname, passwd)
+    urow = UserInfo.objects.filter(uname=uname)
+    password = [i.password for i in urow]
+    print(password)
     if urow:
-        if urow.password == passwd:
+        if password[0] == passwd:
             return HttpResponse('ok')
         else:
             return HttpResponse('password error')
