@@ -1,7 +1,6 @@
 while sleep $1 
 do 
 
-echo '===================================='
 echo ''
 git add ./
 echo '==============add==================='
@@ -15,5 +14,9 @@ echo -n '提交完毕'
 echo $1'秒后再次提交'
 echo ''
 echo '==============commit================'
+echo ''
+echo ''
+echo ''
+echo ''
 
 done
