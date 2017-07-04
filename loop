@@ -1,18 +1,19 @@
 while sleep $1 
 do 
 
-echo 'git add ./'
+echo '===================================='
 echo ''
 git add ./
-echo 'status'
+echo '==============add==================='
 echo ''
 git status
-echo  'git commit -m "shell auto commit"'
+echo '==============status================'
 echo ''
 git commit -m "shell auto commit"
 echo ''
 echo -n '提交完毕'
 echo $1'秒后再次提交'
 echo ''
+echo '==============commit================'
 
 done
