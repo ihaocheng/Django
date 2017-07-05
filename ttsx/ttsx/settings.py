@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login'
+    'ttsx_user'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,8 +106,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/statics/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'statics')]
-
-if __name__ == '__main__':
-    print(STATICFILES_DIRS)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
