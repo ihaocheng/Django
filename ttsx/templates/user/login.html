@@ -1,4 +1,78 @@
 {% extends 'base.html' %}
+{% block head %}
+<script>
+    $(function () {
+        if ({{ con }} == '0')
+        {
+            $('#uname').next().html('用户名不存在')
+			$('#uname').next().show();
+        }
+
+
+        var error_name = false;
+	    var error_password = false;
+
+	$('#uname').blur(function() {
+		check_user_name();
+	});
+
+	$('#upwd').blur(function() {
+		check_pwd();
+	});
+
+	function check_user_name(){
+		var len = $('#uname').val().length;
+		if(len<5||len>20)
+		{
+			$('#uname').next().html('请输入5-20个字符的用户名')
+			$('#uname').next().show();
+			error_name = true;
+		}
+		else
+		{
+			$('#uname').next().hide();
+			error_name = false;
+		}
+	}
+
+	function check_pwd(){
+		var len = $('#upwd').val().length;
+		if(len<8||len>20)
+		{
+			$('#upwd').next().html('密码最少8位，最长20位')
+			$('#upwd').next().show();
+			error_password = true;
+		}
+		else
+		{
+			$('#upwd').next().hide();
+			error_password = false;
+		}
+	}
+
+	$('form').submit(function() {
+		check_user_name();
+		check_pwd();
+
+		if(error_name == false && error_password == false)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	});
+
+
+    });
+
+
+
+
+
+</script>
+{% endblock head %}
 
 {% block body %}
 	<div class="login_top clearfix">
@@ -17,12 +91,12 @@
 				<div class="form_input">
 					<form method="post" action="/user/login_check/">
                         {% csrf_token %}
-						<input type="text" name="uname" class="name_input" placeholder="请输入用户名">
-						<div class="user_error">输入错误</div>
-						<input type="password" name="upwd" class="pass_input" placeholder="请输入密码">
-						<div class="pwd_error">输入错误</div>
+						<input type="text" name="uname" id="uname" class="name_input" placeholder="请输入用户名">
+						<div class="user_error" id="user_error">输入错误</div>
+						<input type="password" name="upwd" id="upwd" class="pass_input" placeholder="请输入密码">
+						<div class="pwd_error" id="pwd_error">输入错误</div>
 						<div class="more_input clearfix">
-							<input type="checkbox" name="">
+							<input type="checkbox">
 							<label>记住用户名</label>
 							<a href="#">忘记密码</a>
 						</div>

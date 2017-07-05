@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from models import UserInfo
 from hashlib import sha1
+from django.http import JsonResponse
 # Create your views here.
 
 def register(request):
@@ -31,7 +32,7 @@ def login(request):
     return render(request, 'user/login.html')
 
 def login_check(request):
-    post = request.POST()
+    post = request.POST
     uname = post.get('uname')
     upwd = post.get('upwd')
 
@@ -42,8 +43,13 @@ def login_check(request):
         upwd_sha1 = s1.hexdigest()
 
         if ulist[0].upwd == upwd_sha1:
-            pass #登陆，保存状态COOKIE
+            return redirect('/user/user_center_info/')
         else:
-            pass #密码错误，重新登陆 
+            context = {'con': '1','uname':uname}
+
     else:
-        pass #没有此用户
+        context = {'con': '0'}
+        return render(request, 'user/login.html', context)
+
+def user_center_info(request):
+    return render(request, 'user/user_center_info.html')
