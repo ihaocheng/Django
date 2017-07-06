@@ -2,6 +2,10 @@
 {% block head %}
 <script>
     $(function () {
+
+        $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
+
         var error_name = false;
 	    var error_password = false;
 
@@ -15,34 +19,50 @@
 
 	function check_user_name(){
 		var len = $('#uname').val().length;
+		$.post('/user/login_check/', {'uname':$('#uname').val()}, function (data) {
+                num0 = data.check
+            });
 		if(len<5||len>20)
 		{
 			$('#uname').next().html('请输入5-20个字符的用户名');
 			$('#uname').next().show();
 			error_name = true;
 		}
+		else if (num0 == '0'){
+		    $('#uname').next().html('用户名不存在');
+            $('#uname').next().show();
+            error_name = true;
+        }
 		else
 		{
 			$('#uname').next().hide();
 			error_name = false;
-			$.post('/user/register/', {'uname':$('#uname').val()}, function () {
-                
-            })
+
 		}
 	}
 
 	function check_pwd(){
 		var len = $('#upwd').val().length;
+		$.post('/user/login_check/', {'upwd':$('#upwd').val(),'uname':$('#uname').val()}, function (data) {
+                num1 = data.check
+            });
 		if(len<8||len>20)
 		{
 			$('#upwd').next().html('密码最少8位，最长20位')
 			$('#upwd').next().show();
 			error_password = true;
 		}
+		else if( num1 == '1')
+		{
+		    $('#upwd').next().html('密码错误，请重新输入');
+            $('#upwd').next().show();
+            error_name = true;
+        }
 		else
 		{
 			$('#upwd').next().hide();
 			error_password = false;
+
 		}
 	}
 
