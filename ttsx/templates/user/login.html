@@ -31,55 +31,54 @@
 	function check_user_name() {
         var len = $('#uname').val().length;
 
-        if (len < 5 || len > 20) {
+        if (len < 5 || len > 20)
+        {
             $('#uname').next().html('请输入5-20个字符的用户名');
             $('#uname').next().show();
             error_name = true;
         }
-        else {
+        else
+        {
             $('#uname').next().hide();
             error_name = false;
-            $.post('/user/login_check/', {'uname': $('#uname').val()}, function (data) {
-                if (data.check == '0') {
+            $.post('/user/login_check2/', {'uname': $('#uname').val(),'upwd':$('#upwd').val()}, function (data) {
+                if (data.check == '0')
+                {
                     $('#uname').next().html('用户名不存在');
                     $('#uname').next().show();
                     error_name = true;
-                    alert(error_name);
                 }
             });
-
         }
-    };
+    }
 
 	function check_pwd() {
-	    if (error_name==true){
-        var len = $('#upwd').val().length;
+	    if (error_name != true){
+            var len = $('#upwd').val().length;
 
-        if (len < 8 || len > 20) {
-            $('#upwd').next().html('密码最少8位，最长20位')
-            $('#upwd').next().show();
-            error_password = true;
-        }
-        else {
-            $('#upwd').next().hide();
-            error_password = false;
-            $.post('/user/login_check/', {'upwd': $('#upwd').val(), 'uname': $('#uname').val()}, function (data) {
-                if (data.check == '1') {
-                    $('#upwd').next().html('密码错误，请重新输入');
-                    $('#upwd').next().show();
-                    error_password = true;
-                    alert("密码是错的"+error_password);
-                }
-            });
-        }
-        }
+            if (len < 8 || len > 20) {
+                $('#upwd').next().html('密码最少8位，最长20位')
+                $('#upwd').next().show();
+                error_password = true;
+            }
+            else {
+                $('#upwd').next().hide();
+                error_password = false;
+                $.post('/user/login_check2/', {'upwd': $('#upwd').val(), 'uname': $('#uname').val()}, function (data) {
+                    if (data.check == '1') {
+                        $('#upwd').next().html('密码错误，请重新输入');
+                        $('#upwd').next().show();
+                        error_password = true;
+                    }
+                });
+            }
+            }
         error_password=true;
-    };
+    }
 
 	$('form').submit(function() {
 		check_user_name();
 		check_pwd();
-        alert("提交"+error_name,"密码"+error_password);
 		if(error_name == false && error_password == false)
 		{
 			return true;

@@ -44,9 +44,9 @@ def login_check(request):
     post = request.POST
     uname = post.get('uname')
     upwd = post.get('upwd')
-
     ulist = UserInfo.objects.filter(uname=uname)
-    if ulist:
+
+    if ulist: #二次判断，防止js被禁用
         s1 = sha1()
         s1.update(upwd)
         upwd_sha1 = s1.hexdigest()
@@ -55,10 +55,30 @@ def login_check(request):
             request.session['uname'] = uname
             return redirect('/user/center_info/')
         else:
-            return JsonResponse({'check':'1'})
+            return redirect('/user/login/')
+    else:
+        return redirect('/user/login/')
+
+
+def login_check2(request): #ajax判断
+    post = request.POST
+    uname = post.get('uname')
+    upwd = post.get('upwd')
+
+    ulist = UserInfo.objects.filter(uname=uname)
+
+    if ulist:
+        s1 = sha1()
+        s1.update(upwd)
+        upwd_sha1 = s1.hexdigest()
+
+        if ulist[0].upwd == upwd_sha1:
+            return JsonResponse({'check':'2'})
+        else:
+            return JsonResponse({'check':'1'}) #密码错误
 
     else:
-        return JsonResponse({'check':'0'})
+        return JsonResponse({'check':'0'}) #用户名不存在
 
 def center_info(request):
     return render(request, 'user/user_center_info.html')
