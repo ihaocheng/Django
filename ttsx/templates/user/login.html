@@ -2,13 +2,6 @@
 {% block head %}
 <script>
     $(function () {
-        if ({{ con }} == '0')
-        {
-            $('#uname').next().html('用户名不存在')
-			$('#uname').next().show();
-        }
-
-
         var error_name = false;
 	    var error_password = false;
 
@@ -24,7 +17,7 @@
 		var len = $('#uname').val().length;
 		if(len<5||len>20)
 		{
-			$('#uname').next().html('请输入5-20个字符的用户名')
+			$('#uname').next().html('请输入5-20个字符的用户名');
 			$('#uname').next().show();
 			error_name = true;
 		}
@@ -32,6 +25,9 @@
 		{
 			$('#uname').next().hide();
 			error_name = false;
+			$.post('/user/register/', {'uname':$('#uname').val()}, function () {
+                
+            })
 		}
 	}
 
