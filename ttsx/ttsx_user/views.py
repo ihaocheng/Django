@@ -35,10 +35,10 @@ def register_check(request):
     u.save()
     return redirect('/user/login/')
 
-
 def login(request):
+    #uname = request.COOKIES['uname']
     context = {'title':'登陆'}
-    return render(request, 'user/login.html')
+    return render(request, 'user/login.html',context)
 
 def login_check(request):
     post = request.POST
@@ -59,7 +59,6 @@ def login_check(request):
     else:
         return redirect('/user/login/')
 
-
 def login_check2(request): #ajax判断
     post = request.POST
     uname = post.get('uname')
@@ -73,13 +72,27 @@ def login_check2(request): #ajax判断
         upwd_sha1 = s1.hexdigest()
 
         if ulist[0].upwd == upwd_sha1:
-            return JsonResponse({'check':'2'})
+            return JsonResponse({'check': '2'})
         else:
             return JsonResponse({'check':'1'}) #密码错误
 
     else:
         return JsonResponse({'check':'0'}) #用户名不存在
 
+def logout(request):
+    request.session.flush()
+
 def center_info(request):
-    return render(request, 'user/user_center_info.html')
+    uname = request.session.get('uname')
+    context = {'title': '用户中心', 'uname':uname, 'top':'1'}
+    if uname:
+        user = UserInfo.objects.filter(uname=uname)
+        context['user'] = user[0]
+    return render(request, 'user/user_center_info.html', context)
+
+def center_order(request):
+    pass
+
+def center_site(request):
+    pass
 

@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block head %}
-<script>
-    $(function () {
+{#    <script type="text/javascript" src="/static/js/login.js"></script>#}
+    <script>
+ $(function () {
 
         $.ajaxSetup({
-            data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+            async:false,
+        });
 
         var error_name = false;
 	    var error_password = false;
@@ -26,7 +29,6 @@
 		$('#upwd').next().html('');
 	    $('#upwd').next().hide();
 	});
-
 
 	function check_user_name() {
         var len = $('#uname').val().length;
@@ -65,22 +67,31 @@
                 $('#upwd').next().hide();
                 error_password = false;
                 $.post('/user/login_check2/', {'upwd': $('#upwd').val(), 'uname': $('#uname').val()}, function (data) {
-                    if (data.check == '1') {
+                    if (data.check == '1')
+                    {
                         $('#upwd').next().html('密码错误，请重新输入');
                         $('#upwd').next().show();
-                        error_password = true;
+                         error_password = true;
                     }
                 });
             }
             }
-        error_password=true;
+        else
+        {
+            error_password=true;
+        }
     }
 
 	$('form').submit(function() {
 		check_user_name();
 		check_pwd();
+
 		if(error_name == false && error_password == false)
 		{
+            if($('#checkbox').attr('checked'))
+            {
+                document.cookie="uname="+$('#uname').val();
+            }
 			return true;
 		}
 		else
@@ -89,14 +100,9 @@
 		}
 	});
 
-
     });
 
-
-
-
-
-</script>
+    </script>
 {% endblock head %}
 
 {% block body %}
@@ -116,12 +122,12 @@
 				<div class="form_input">
 					<form method="post" action="/user/login_check/">
                         {% csrf_token %}
-						<input type="text" name="uname" id="uname" class="name_input" placeholder="请输入用户名">
+						<input type="text" name="uname" id="uname" class="name_input" placeholder="请输入用户名" value="{{ uname }}">
 						<div class="user_error" id="user_error">输入错误</div>
 						<input type="password" name="upwd" id="upwd" class="pass_input" placeholder="请输入密码">
 						<div class="pwd_error" id="pwd_error">输入错误</div>
 						<div class="more_input clearfix">
-							<input type="checkbox">
+							<input type="checkbox" id="checkbox" checked="checked">
 							<label>记住用户名</label>
 							<a href="#">忘记密码</a>
 						</div>

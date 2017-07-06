@@ -7,6 +7,36 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
 	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
     {% block head %}{% endblock head %}
+
+{% if top == '1' %}
+    <div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到天天生鲜!</div>
+			<div class="fr">
+				<div class="login_info fl" id="login_info">
+					欢迎您：<em>{{ uname }}</em> <a id="logout" href="/user/center_info/">登出</a>
+				</div>
+				<div class="login_btn fl" id="login_btn">
+					<a href="/user/login/">登录</a>
+					<span>|</span>
+					<a href="/user/register/">注册</a>
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="/user/center_info/">用户中心</a>
+					<span>|</span>
+					<a href="../cart.html">我的购物车</a>
+					<span>|</span>
+					<a href="/user/center_order/">我的订单</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+
+
+
 </head>
 <body>
     {% block body %}{% endblock body %}
