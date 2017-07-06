@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^register_check2/$', views.register_check2),
     url(r'^login/$', views.login),
     url(r'^login_check/$', views.login_check),
-    url(r'^user_center_info/', views.user_center_info),
+    url(r'^center_info/', views.center_info),
 ]

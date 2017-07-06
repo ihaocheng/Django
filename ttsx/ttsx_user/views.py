@@ -41,16 +41,11 @@ def login(request):
     return render(request, 'user/login.html')
 
 def login_check(request):
-    #if request.method == 'GET'
-
     post = request.POST
     uname = post.get('uname')
     upwd = post.get('upwd')
-    print(uname)
-    print(upwd)
 
     ulist = UserInfo.objects.filter(uname=uname)
-    print(ulist)
     if ulist:
         s1 = sha1()
         s1.update(upwd)
@@ -58,12 +53,13 @@ def login_check(request):
 
         if ulist[0].upwd == upwd_sha1:
             request.session['uname'] = uname
-            return redirect('/user/user_center_info/')
+            return redirect('/user/center_info/')
         else:
             return JsonResponse({'check':'1'})
 
     else:
         return JsonResponse({'check':'0'})
 
-def user_center_info(request):
+def center_info(request):
     return render(request, 'user/user_center_info.html')
+
