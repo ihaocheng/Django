@@ -37,8 +37,10 @@ def register_check(request):
 
 def login(request):
     if not request.session.get('uname'):
-        #uname = request.COOKIES['uname']
         context = {'title':'登陆'}
+        uname = request.COOKIES.get('uname')
+        if uname:
+            context['uname'] = uname
         return render(request, 'user/login.html',context)
     else:
         return redirect('/')
@@ -58,7 +60,11 @@ def login_check(request):
             request.session['uname'] = uname
             url = request.session.get('url_path','/')
             print(url)
-            return redirect(url)
+            response =  redirect(url)
+            print(post.get('checkbox'))
+            if post.get('checkbox') == 'on':
+                response.set_cookie('uname',uname,3600*2)
+            return response
         else:
             return redirect('/user/login/')
     else:
@@ -88,7 +94,8 @@ def logout(request):
     url = request.session.get('url_path','/')
     request.session.flush()
     request.session['url_path'] = url
-
+    print(url)
+    return redirect(url)
 
 @decorator.islogin
 def center_info(request):

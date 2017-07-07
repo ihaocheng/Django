@@ -16,19 +16,14 @@
         {
             $('#login_info').show().next().hide()
         }
-
-        $('#logout').click(function () {
-            $.get('/user/logout/')
-        })
     })
-
     </script>
     <div class="header_con">
 		<div class="header">
 			<div class="welcome fl">欢迎来到天天生鲜!</div>
 			<div class="fr">
 				<div class="login_info fl" id="login_info">
-					欢迎您：<em>{{ uname }}</em> <a id="logout" href="#">登出</a>
+					欢迎您：<em>{{ uname }}</em> <a id="logout" href="/user/logout/">登出</a>
 				</div>
 				<div class="login_btn fl" id="login_btn">
 					<a href="/user/login/">登录</a>

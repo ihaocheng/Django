@@ -88,10 +88,11 @@
 
 		if(error_name == false && error_password == false)
 		{
-            if($('#checkbox').attr('checked'))
-            {
-                document.cookie="uname="+$('#uname').val();
-            }
+{#            if($('#checkbox').attr('checked'))#}
+{#            {#}
+{#                document.cookie="uname="+$('#uname').val();#}
+{#                #}
+{#            }#}
 			return true;
 		}
 		else
@@ -127,7 +128,7 @@
 						<input type="password" name="upwd" id="upwd" class="pass_input" placeholder="请输入密码">
 						<div class="pwd_error" id="pwd_error">输入错误</div>
 						<div class="more_input clearfix">
-							<input type="checkbox" id="checkbox" checked="checked">
+							<input type="checkbox" id="checkbox" name="checkbox" checked="checked">
 							<label>记住用户名</label>
 							<a href="#">忘记密码</a>
 						</div>
