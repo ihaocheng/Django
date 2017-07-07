@@ -53,7 +53,9 @@ def login_check(request):
 
         if ulist[0].upwd == upwd_sha1:
             request.session['uname'] = uname
-            return redirect('/user/center_info/')
+            url = request.session.get('url_path','/')
+            print(url)
+            return redirect(url)
         else:
             return redirect('/user/login/')
     else:
@@ -80,7 +82,10 @@ def login_check2(request): #ajax判断
         return JsonResponse({'check':'0'}) #用户名不存在
 
 def logout(request):
+    url = request.session.get('url_path','/')
     request.session.flush()
+    request.session['url_path'] = url
+
 
 @decorator.islogin
 def center_info(request):
@@ -91,8 +96,14 @@ def center_info(request):
         context['user'] = user[0]
     return render(request, 'user/user_center_info.html', context)
 
+@decorator.islogin
 def center_order(request):
-    pass
+    uname = request.session.get('uname')
+    context = {'title':'订单', 'uname':uname, 'top':'1'}
+    return render(request, 'user/user_center_order.html', context)
 
+@decorator.islogin
 def center_site(request):
-    pass
+    uname = request.session.get('uname')
+    context = {'title': '收货地址', 'uname':uname, 'top':'1'}
+    return render(request, 'user/user_center_site.html', context)

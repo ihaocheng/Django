@@ -1,23 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <script>
-    $(function () {
-        if('{{ uname }}' != 'None')
-        {
-            $('#login_info').show().next().hide()
-        }
 
-        $('#logout').click(function () {
-            $.get('/user/logout/')
-        })
-
-
-
-
-    })
-
-    </script>
 {% endblock head %}
 {% block body %}
 

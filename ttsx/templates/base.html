@@ -7,8 +7,22 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
 	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
     {% block head %}{% endblock head %}
+</head>
 
 {% if top == '1' %}
+    <script>
+    $(function () {
+        if('{{ uname }}' != 'None')
+        {
+            $('#login_info').show().next().hide()
+        }
+
+        $('#logout').click(function () {
+            $.get('/user/logout/')
+        })
+    })
+
+    </script>
     <div class="header_con">
 		<div class="header">
 			<div class="welcome fl">欢迎来到天天生鲜!</div>
@@ -37,7 +51,7 @@
 
 
 
-</head>
+
 <body>
     {% block body %}{% endblock body %}
 

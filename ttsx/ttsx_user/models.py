@@ -11,4 +11,3 @@ class UserInfo(models.Model):
 
     rname=models.CharField(default='',max_length=20)
     rcode=models.CharField(default='',max_length=6)
-    updata = models.DateField(default=datetime.now())
