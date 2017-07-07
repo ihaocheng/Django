@@ -2,9 +2,9 @@
 from django.shortcuts import render, redirect
 from models import UserInfo
 from hashlib import sha1
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 # Create your views here.
-
+from ttsx import decorator
 def register(request):
     context = {'title':'注册'}
     return render(request, 'user/register.html',context)
@@ -82,6 +82,7 @@ def login_check2(request): #ajax判断
 def logout(request):
     request.session.flush()
 
+@decorator.islogin
 def center_info(request):
     uname = request.session.get('uname')
     context = {'title': '用户中心', 'uname':uname, 'top':'1'}
@@ -95,4 +96,3 @@ def center_order(request):
 
 def center_site(request):
     pass
-
