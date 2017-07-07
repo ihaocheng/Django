@@ -36,9 +36,12 @@ def register_check(request):
     return redirect('/user/login/')
 
 def login(request):
-    #uname = request.COOKIES['uname']
-    context = {'title':'登陆'}
-    return render(request, 'user/login.html',context)
+    if not request.session.get('uname'):
+        #uname = request.COOKIES['uname']
+        context = {'title':'登陆'}
+        return render(request, 'user/login.html',context)
+    else:
+        return redirect('/')
 
 def login_check(request):
     post = request.POST

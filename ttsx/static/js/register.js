@@ -6,13 +6,13 @@ $(function(){
 	var error_email = false;
 	var error_check = false;
 
-
 	$('#user_name').blur(function() {
 		check_user_name();
 	});
 
 	$('#pwd').blur(function() {
 		check_pwd();
+		alert(num);
 	});
 
 	$('#cpwd').blur(function() {

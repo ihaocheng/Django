@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ttsx_user'
+    'ttsx_user',
+    'ttsx_goods',
 )
 
 MIDDLEWARE_CLASSES = (
