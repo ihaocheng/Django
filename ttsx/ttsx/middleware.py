@@ -1,6 +1,11 @@
 
-class UrlPathMiddleware():
-    def process_request(self,request):
+try:
+    from django.utils.deprecation import MiddlewareMixin
+except ImportError:
+    MiddlewareMixin = object
+
+class UrlPathMiddleware(MiddlewareMixin):
+    def process_view(self, request, *args):
         if request.path not in [
             '/user/register/',
             '/user/register_check/',
@@ -10,4 +15,6 @@ class UrlPathMiddleware():
             '/user/login_check/',
             '/user/login_check2/',
         ]:
-            request.session['url_path']=request.get_full_path()
+            url = request.get_full_path()
+            request.session['url_path']= url
+            print(url)

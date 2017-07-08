@@ -59,9 +59,7 @@ def login_check(request):
         if ulist[0].upwd == upwd_sha1:
             request.session['uname'] = uname
             url = request.session.get('url_path','/')
-            print(url)
             response =  redirect(url)
-            print(post.get('checkbox'))
             if post.get('checkbox') == 'on':
                 response.set_cookie('uname',uname,3600*2)
             return response

@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include(ttsx_user.urls)),
     url(r'^goods/|^$^', include(ttsx_goods.urls)),
+    url(r'^tinymce/', include('tinymce.urls')),
 ]
