@@ -17,6 +17,6 @@ class GoodsInfo(models.Model):
     gunit=models.CharField(max_length=10)
     isDelete = models.BooleanField(default=False)
     gsubtitle=models.CharField(max_length=200)
-    gkucun = models.IntegerField(default=100)
+    gstore = models.IntegerField(default=100)
     gcontent=HTMLField()
     gtype=models.ForeignKey('TypeInfo')
