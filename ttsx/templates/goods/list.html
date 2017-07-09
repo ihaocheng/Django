@@ -92,8 +92,8 @@
 			<ul class="goods_type_list clearfix">
                 {% for i in goods %}
 				<li>
-					<a href="/goods/detail/"><img src="/static/{{ i.gpic }}"></a>
-					<h4><a href="/goods/detail/">{{ i.gtitle }}</a></h4>
+					<a href="/goods/detail{{ t.id }}{{ i.id }}/"><img src="/static/{{ i.gpic }}"></a>
+					<h4><a href="/goods/detail{{ t.id }}{{ i.id }}/">{{ i.gtitle }}</a></h4>
 					<div class="operate">
 						<span class="prize">￥{{ i.gprice }}</span>
 						<span class="unit">{{ i.gprice }}/{{ i.gunit }}</span>

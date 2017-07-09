@@ -39,9 +39,11 @@ def goods_list(request, tid, pindex):
         cla = {'price': '', 'click': '', 'default': 'active'}
 
     # 无tid默认为全部分类
-    if not tid:
+    if tid == '0' or (not tid):
         goods_list = GoodsInfo.objects.all().order_by(ord_str)
         goods_list2 = GoodsInfo.objects.all().order_by('-id')
+        t = {'id':'0'}
+        context['t'] = t
     else:
         t = TypeInfo.objects.get(pk=int(tid))
         goods_list = t.goodsinfo_set.order_by(ord_str)
@@ -62,5 +64,21 @@ def list_tag(request):
     request.session['tag'] = tag
     return JsonResponse({}) #ajax 必须返回一个jsonresponse ，服务器才执行写入session
 
+def detail(request, tid, gid):
+    uname = request.session.get('uname')
 
 
+    if tid == '0':
+        new_goods = GoodsInfo.objects.all().order_by('-id')[:2]
+    else:
+        t = TypeInfo.objects.get(pk=int(tid))
+        new_goods = t.goodsinfo_set.order_by('-id')[:2]
+    good = GoodsInfo.objects.filter(pk=int(gid))[0]
+
+    good.gclick += 1
+    good.save()
+
+
+    context = {'uname':uname, 'top':'1', 'title':'商品详细信息',
+               'new_goods':new_goods, 'good':good}
+    return render(request, 'goods/detail.html', context)
