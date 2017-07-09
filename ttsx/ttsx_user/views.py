@@ -92,7 +92,6 @@ def logout(request):
     url = request.session.get('url_path','/')
     request.session.flush()
     request.session['url_path'] = url
-    print(url)
     return redirect(url)
 
 @decorator.islogin

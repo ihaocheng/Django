@@ -4,12 +4,14 @@
     <script>
     $(function () {
 {#        $.ajaxSetup({#}
-{#            async:false,#}
+{#            async:false#}
 {#        });#}
 
         $('.sort_bar a').click(function () {
-            $.get('/goods/tag/',{'tag':$(this).attr('name')})
+{#            $.get('/goods/list_tag/',{'tag':$(this).attr('name')}); {# ajax 传标签属性值 #}
+            $(this).addClass('active').siblings().removeClass('active')
         });
+
 
     })
     </script>
@@ -79,9 +81,12 @@
 
 		<div class="r_wrap fr clearfix">
 			<div class="sort_bar">
-				<a href="{{ url }}{# ?tag=default #}" name="default" class="active">默认</a>
-				<a href="{{ url }}{# ?tag=price #}" name="price">价格</a>
-				<a href="{{ url }}{# ?tag=click #}" name="click">人气</a>
+{#				<a href="#" name="default" class="active">默认</a>#}
+{#				<a href="/list{{ t.id }}" name="price">价格</a>#}
+{#				<a href="/list{{ t.id }}" name="click">人气</a>#}
+                <a href="/goods/list{{ t.id }}?tag=default" class="{{ cla.default }}">默认</a>
+				<a href="/goods/list{{ t.id }}?tag=price" class="{{ cla.price }}">价格</a>
+				<a href="/goods/list{{ t.id }}?tag=click" class="{{ cla.click }}">人气</a>
 			</div>
 
 			<ul class="goods_type_list clearfix">
@@ -99,13 +104,19 @@
 			</ul>
 
 			<div class="pagenation">
-				<a href="#"><上一页</a>
-				<a href="#" class="active">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-				<a href="#">下一页></a>
+            {% if goods.has_previous %}
+                <a href="/goods/list{{ t.id }}{{ goods.number|add:-1 }}">&lt上一页</a>
+            {% endif %}
+                {% for pindex in goods.paginator.page_range %}
+                    {% if goods.number == pindex %}
+                        <a class="active">{{ pindex }}</a>
+                    {% else %}
+        				<a href="/goods/list{{ t.id }}{{ pindex }}">{{ pindex }}</a>
+                    {% endif %}
+                {% endfor %}
+            {% if goods.has_next %}
+                <a href="/goods/list{{ t.id }}{{ goods.number|add:1 }}">下一页&gt</a>
+            {% endif %}
 			</div>
 		</div>
 	</div>

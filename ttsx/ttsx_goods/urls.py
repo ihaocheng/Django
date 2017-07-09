@@ -6,6 +6,6 @@ urlpatterns = [
     url(r'^$',views.index),
     url(r'^index/$',views.index),
     url(r'^list(\d{0,1})(\d*)',views.goods_list),
-    url(r'^tag/$',views.tag),
+    url(r'^list_tag/$',views.list_tag),
 
 ]
