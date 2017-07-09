@@ -26,7 +26,9 @@ def goods_list(request, tid, pindex):
     context = {'uname':uname, 'top':'1', 'title':'商品列表'}
 
     # tag = request.session.get('tag') # 使用session传参
-    tag = request.GET.get('tag') # 使用地址栏参数传参
+    # tag = request.GET.get('tag') # 使用地址栏参数传参
+    tag = request.COOKIES.get('tag')
+    print(tag)
     if tag == 'price':
         ord_str = 'gprice'
         cla = {'price':'active', 'click':'', 'default':''}
@@ -59,10 +61,10 @@ def goods_list(request, tid, pindex):
     context['cla'] = cla
     return render(request, 'goods/list.html', context)
 
-def list_tag(request):
-    tag = request.GET.get('tag')
-    request.session['tag'] = tag
-    return JsonResponse({}) #ajax 必须返回一个jsonresponse ，服务器才执行写入session
+# def list_tag(request):
+#     tag = request.GET.get('tag')
+#     request.session['tag'] = tag
+#     return JsonResponse({}) #ajax 必须返回一个jsonresponse ，服务器才执行写入session
 
 def detail(request, tid, gid):
     uname = request.session.get('uname')

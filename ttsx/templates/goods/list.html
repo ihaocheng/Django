@@ -8,10 +8,10 @@
 {#        });#}
 
         $('.sort_bar a').click(function () {
+            $.cookie('tag', $(this).attr('name'),{path: "/"}); //用cookie传参
 {#            $.get('/goods/list_tag/',{'tag':$(this).attr('name')}); {# ajax 传标签属性值 #}
             $(this).addClass('active').siblings().removeClass('active')
         });
-
 
     })
     </script>
@@ -81,12 +81,12 @@
 
 		<div class="r_wrap fr clearfix">
 			<div class="sort_bar">
-{#				<a href="#" name="default" class="active">默认</a>#}
-{#				<a href="/list{{ t.id }}" name="price">价格</a>#}
-{#				<a href="/list{{ t.id }}" name="click">人气</a>#}
-                <a href="/goods/list{{ t.id }}?tag=default" class="{{ cla.default }}">默认</a>
-				<a href="/goods/list{{ t.id }}?tag=price" class="{{ cla.price }}">价格</a>
-				<a href="/goods/list{{ t.id }}?tag=click" class="{{ cla.click }}">人气</a>
+				<a href="/goods/list{{ t.id }}" name="default" class="{{ cla.default }}">默认</a>
+				<a href="/goods/list{{ t.id }}" name="price" class="{{ cla.price }}">价格</a>
+				<a href="/goods/list{{ t.id }}" name="click" class="{{ cla.click }}">人气</a>
+{#                <a href="/goods/list{{ t.id }}?tag=default" class="{{ cla.default }}">默认</a>#}
+{#				<a href="/goods/list{{ t.id }}?tag=price" class="{{ cla.price }}">价格</a>#}
+{#				<a href="/goods/list{{ t.id }}?tag=click" class="{{ cla.click }}">人气</a>#}
 			</div>
 
 			<ul class="goods_type_list clearfix">
