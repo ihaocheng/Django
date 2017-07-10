@@ -16,14 +16,14 @@ def index(request):
         click_list = i.goodsinfo_set.order_by('-gclick')[:3]
         alist.append({'type':i, 'goods':goods_list, 'click':click_list})
 
-    context = {'uname':uname, 'top':'1', 'title':'首页', 'alist':alist}
+    context = {'uname':uname, 'title':'首页', 'alist':alist}
     return render(request, 'goods/index.html', context)
 
 def goods_list(request, tid, pindex):
     if not pindex:  # 分页索引值，默认为1
         pindex = 1
     uname = request.session.get('uname') # 模板中js代码判断登陆状态
-    context = {'uname':uname, 'top':'1', 'title':'商品列表'}
+    context = {'uname':uname, 'title':'商品列表'}
 
     # tag = request.session.get('tag') # 使用session传参
     # tag = request.GET.get('tag') # 使用地址栏参数传参
@@ -56,9 +56,24 @@ def goods_list(request, tid, pindex):
     context['new_goods'] = new_goods
 
     paginator = Paginator(goods_list, 5)
+    psum = paginator.num_pages
+
+    pindex = int(pindex)
+    left = (pindex // 5) * 5 + 1
+    right = (pindex // 5 + 1) * 5 + 1
+
+    if pindex%5 == 0:
+        left-=5
+        right-=5
+    if right > psum:
+        right = psum+1
+
+    page_range = range(left, right)
+
     goods_page = paginator.page(int(pindex))
     context['goods'] = goods_page
     context['cla'] = cla
+    context['page_range'] = page_range
     return render(request, 'goods/list.html', context)
 
 # def list_tag(request):
@@ -75,12 +90,25 @@ def detail(request, tid, gid):
     else:
         t = TypeInfo.objects.get(pk=int(tid))
         new_goods = t.goodsinfo_set.order_by('-id')[:2]
-    good = GoodsInfo.objects.filter(pk=int(gid))[0]
+    goods = GoodsInfo.objects.filter(pk=int(gid))[0]
 
-    good.gclick += 1
-    good.save()
+    goods.gclick += 1 # 点击量加1
+    goods.save()
 
+    context = {'uname':uname, 'title':'商品详细信息',
+               'new_goods':new_goods, 'goods':goods}
 
-    context = {'uname':uname, 'top':'1', 'title':'商品详细信息',
-               'new_goods':new_goods, 'good':good}
-    return render(request, 'goods/detail.html', context)
+    gid_str = request.COOKIES.get('glance','')
+    gid_list = gid_str.split(',')
+    print(gid_list)
+    if str(goods.id) in gid_list: # 删除旧的浏览记录
+        gid_list.remove(str(goods.id))
+        print("删除")
+        print(gid_list)
+    gid_str = ",".join(gid_list)
+    gid_str += ",%s" % goods.id
+
+    response =  render(request, 'goods/detail.html', context)
+    response.set_cookie('glance', gid_str)
+
+    return response

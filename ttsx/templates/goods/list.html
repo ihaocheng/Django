@@ -70,7 +70,7 @@
 				<ul>
                     {% for i in new_goods %}
 					<li>
-						<a href="#"><img src="/static/{{ i.gpic }}"></a>
+						<a href="/goods/detail{{ t.id }}{{ i.id }}"><img src="/static/{{ i.gpic }}"></a>
 						<h4><a href="#">{{ i.gtitle }}</a></h4>
 						<div class="prize">￥{{ i.gprice }}</div>
 					</li>
@@ -105,17 +105,21 @@
 
 			<div class="pagenation">
             {% if goods.has_previous %}
+                <a href="/goods/list{{ t.id }}1">首页</a>
                 <a href="/goods/list{{ t.id }}{{ goods.number|add:-1 }}">&lt上一页</a>
             {% endif %}
-                {% for pindex in goods.paginator.page_range %}
-                    {% if goods.number == pindex %}
-                        <a class="active">{{ pindex }}</a>
-                    {% else %}
-        				<a href="/goods/list{{ t.id }}{{ pindex }}">{{ pindex }}</a>
-                    {% endif %}
-                {% endfor %}
+
+            {% for pindex in page_range %}
+                {% if goods.number == pindex %}
+                    <a class="active">{{ pindex }}</a>
+                {% else %}
+                    <a href="/goods/list{{ t.id }}{{ pindex }}">{{ pindex }}</a>
+                {% endif %}
+            {% endfor %}
+
             {% if goods.has_next %}
                 <a href="/goods/list{{ t.id }}{{ goods.number|add:1 }}">下一页&gt</a>
+                <a href="/goods/list{{ t.id }}{{ goods.paginator.num_pages}}">末页</a>
             {% endif %}
 			</div>
 		</div>

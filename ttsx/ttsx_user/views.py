@@ -1,12 +1,13 @@
 #coding=utf-8
 from django.shortcuts import render, redirect
 from models import UserInfo
+from ttsx_goods.models import GoodsInfo
 from hashlib import sha1
 from django.http import JsonResponse, HttpResponse
 # Create your views here.
 from ttsx import decorator
 def register(request):
-    context = {'title':'注册'}
+    context = {'title':'注册', 'top' : '0'}
     return render(request, 'user/register.html',context)
 
 def register_check2(request):
@@ -37,7 +38,7 @@ def register_check(request):
 
 def login(request):
     if not request.session.get('uname'):
-        context = {'title':'登陆'}
+        context = {'title':'登陆', 'top' : '0'}
         uname = request.COOKIES.get('uname')
         if uname:
             context['uname'] = uname
@@ -97,20 +98,29 @@ def logout(request):
 @decorator.islogin
 def center_info(request):
     uname = request.session.get('uname')
-    context = {'title': '用户中心', 'uname':uname, 'top':'1'}
+    context = {'title': '用户中心', 'uname':uname}
     if uname:
         user = UserInfo.objects.filter(uname=uname)
         context['user'] = user[0]
+
+    gid_str = request.COOKIES.get('glance','')
+    gid_list = gid_str.split(',')
+    gid_list = gid_list[1:][::-1]
+    goods = []
+    for gid in gid_list:
+        goods.append(GoodsInfo.objects.filter(pk=int(gid))[0])
+    context['goods'] = goods
+
     return render(request, 'user/user_center_info.html', context)
 
 @decorator.islogin
 def center_order(request):
     uname = request.session.get('uname')
-    context = {'title':'订单', 'uname':uname, 'top':'1'}
+    context = {'title':'订单', 'uname':uname}
     return render(request, 'user/user_center_order.html', context)
 
 @decorator.islogin
 def center_site(request):
     uname = request.session.get('uname')
-    context = {'title': '收货地址', 'uname':uname, 'top':'1'}
+    context = {'title': '收货地址', 'uname':uname}
     return render(request, 'user/user_center_site.html', context)

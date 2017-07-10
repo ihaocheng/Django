@@ -13,14 +13,14 @@
 	</div>
 
      <div class="goods_detail_con clearfix">
-		<div class="goods_detail_pic fl"><img src="/static/{{ good.gpic }}"></div>
+		<div class="goods_detail_pic fl"><img src="/static/{{ goods.gpic }}"></div>
 
 		<div class="goods_detail_list fr">
-			<h3>{{ good.gtitle }}</h3>
-			<p>{{ good.gsubtitle }}</p>
+			<h3>{{ goods.gtitle }}</h3>
+			<p>{{ goods.gsubtitle }}</p>
 			<div class="prize_bar">
-				<span class="show_pirze">¥<em>{{ good.gprice }}</em></span>
-				<span class="show_unit">单  位：{{ good.gunit }}</span>
+				<span class="show_pirze">¥<em>{{ goods.gprice }}</em></span>
+				<span class="show_unit">单  位：{{ goods.gunit }}</span>
 			</div>
 			<div class="goods_num clearfix">
 				<div class="num_name fl">数 量：</div>
@@ -50,7 +50,7 @@
 			<div class="tab_content">
 				<dl>
 					<dt>商品详情：</dt>
-					<dd>{{ good.gcontent|safe }}</dd>
+					<dd>{{ goods.gcontent|safe }}</dd>
 				</dl>
 			</div>
 

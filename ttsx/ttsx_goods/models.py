@@ -6,8 +6,10 @@ class TypeInfo(models.Model):
     ttitle=models.CharField(max_length=10)
     isDelete=models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.ttitle.encode('utf-8')
+    # def __str__(self):
+    #     return self.ttitle.encode('utf-8')
+    # def __int__(self):
+    #     return self.id
 
 class GoodsInfo(models.Model):
     gtitle=models.CharField(max_length=20)
