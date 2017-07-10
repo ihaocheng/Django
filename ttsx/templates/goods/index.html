@@ -62,7 +62,7 @@
 			<div class="subtitle fl">
 				<span>|</span>
                 {% for i in item.click %}
-				<a href="#">{{ i.gtitle|truncatechars:20 }}</a>
+				<a href="/goods/detail{{ i.gtype.id }}{{ i.id }}">{{ i.gtitle|truncatechars:20 }}</a>
                 {% endfor %}
 			</div>
 			<a href="/goods/list{{ item.type.id }}/" class="goods_more fr" id="fruit_more">查看更多 ></a>
@@ -74,7 +74,7 @@
                 {% for i in item.goods %}
 				<li>
 					<h4><a href="#">{{ i.gtitle }}</a></h4>
-					<a href="#"><img src="/static/{{ i.gpic }}"></a>
+					<a href="/goods/detail{{ i.gtype.id }}{{ i.id }}"><img src="/static/{{ i.gpic }}"></a>
 					<div class="prize">￥ {{ i.gprice }}</div>
 				</li>
                     {% endfor %}

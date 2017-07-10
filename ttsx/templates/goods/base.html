@@ -45,8 +45,8 @@
 				<ul>
                     {% for i in new_goods %}
 					<li>
-						<a href="#"><img src="/static/{{ i.gpic }}"></a>
-						<h4><a href="#">{{ i.gtitle }}</a></h4>
+						<a href="/goods/detail{{ i.gtype.id }}{{ i.id }}"><img src="/static/{{ i.gpic }}"></a>
+						<h4><a href="/goods/detail{{ i.gtype.id }}{{ i.id }}">{{ i.gtitle }}</a></h4>
 						<div class="prize">￥{{ i.gprice }}</div>
 					</li>
                     {% endfor %}
