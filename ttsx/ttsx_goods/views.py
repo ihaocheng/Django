@@ -112,3 +112,17 @@ def detail(request, tid, gid):
     response.set_cookie('glance', gid_str)
 
     return response
+
+def query(request):
+    return render(request,'goods/query.html')
+
+def search(request, page):
+    if not page:
+        page = 1
+    page = int(page)
+
+    query = request.GET.get('q')
+    paginator = Paginator(query, 10)
+    page = paginator.page(page)
+    return render(request, 'search/search.html', {'page': page})
+

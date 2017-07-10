@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/.virtualenvs/django_py2/lib/python2.7/site-packages/haystack/backends/.idea/backends.iml" filepath="$USER_HOME$/.virtualenvs/django_py2/lib/python2.7/site-packages/haystack/backends/.idea/backends.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ttsx.iml" filepath="$PROJECT_DIR$/.idea/ttsx.iml" />
     </modules>
   </component>

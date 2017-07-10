@@ -8,5 +8,7 @@ urlpatterns = [
     url(r'^list(\d?)(\d*)',views.goods_list),
     # url(r'^list_tag/$',views.list_tag),
     url(r'^detail(\d?)(\d*)',views.detail),
+    url(r'^query/', views.query),
+    url(r'^search(\d*)/', views.search),
 
 ]

@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^user/', include(ttsx_user.urls)),
     url(r'^goods/|^$^', include(ttsx_goods.urls)),
     url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^search/', include('haystack.urls')),
 ]
