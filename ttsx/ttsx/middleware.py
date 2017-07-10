@@ -15,6 +15,7 @@ class UrlPathMiddleware(MiddlewareMixin):
             '/user/login_check/',
             '/user/login_check2/',
             '/goods/list_tag/',
+            '/user/site_set/',
         ]:
             url = request.get_full_path()
             request.session['url_path'] = url

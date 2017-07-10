@@ -124,18 +124,22 @@ def center_site(request):
     uname = request.session.get('uname')
     user = UserInfo.objects.filter(uname=uname)[0]
 
+    context = {'title': '收货地址', 'uname':uname, 'user':user}
+    return render(request, 'user/user_center_site.html', context)
+
+def site_set(request):
+    uname = request.session.get('uname')
+    user = UserInfo.objects.filter(uname=uname)[0]
+
     post = request.POST
     rname = post.get('rname')
     uaddress = post.get('uaddress')
-    ucode = post.get('ucode')
+    rcode = post.get('ucode')
     utel = post.get('utel')
-    print(post)
 
-    user['rname'] = rname
-    user['uaddress'] = uaddress
-    user['ucode'] = ucode
-    user['utel'] = utel
+    user.rname = rname
+    user.uaddress = uaddress
+    user.rcode = rcode
+    user.utel = utel
     user.save()
-
-    context = {'title': '收货地址', 'uname':uname, 'user':user}
-    return render(request, 'user/user_center_site.html', context)
+    return redirect('/user/center_site/')

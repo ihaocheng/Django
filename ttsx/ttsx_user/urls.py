@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^center_info/$', views.center_info),
     url(r'^center_order/$', views.center_order),
     url(r'^center_site/$', views.center_site),
+    url(r'^site_set/$', views.site_set),
 ]
