@@ -1,4 +1,4 @@
-from django.conf.urls import url, include, patterns
+from django.conf.urls import url
 from ttsx_goods import views
 
 
