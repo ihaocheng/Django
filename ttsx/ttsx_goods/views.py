@@ -59,14 +59,18 @@ def goods_list(request, tid, pindex):
     psum = paginator.num_pages
 
     pindex = int(pindex)
-    left = (pindex // 5) * 5 + 1
-    right = (pindex // 5 + 1) * 5 + 1
-
-    if pindex%5 == 0:
-        left-=5
-        right-=5
+    # left = (pindex // 5) * 5 + 1
+    # right = (pindex // 5 + 1) * 5 + 1
+    left = pindex - 2
+    right = pindex + 3
+    # if pindex%5 == 0:
+    #     left-=5
+    #     right-=5
     if right > psum:
         right = psum+1
+    if left < 1:
+        left = 1
+        right = 6
 
     page_range = range(left, right)
 
