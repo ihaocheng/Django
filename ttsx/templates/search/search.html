@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
-{% block body %} }
+
+
+{% block body %}
+
 <h1>搜索&nbsp;<b>{{query}}</b>&nbsp;结果如下：</h1>
 <ul class="goods_type_list clearfix">
 
@@ -9,7 +12,7 @@
         <a ><img src="/static/{{ item.object.gpic }}"></a>
         <h4><a href="">{{ item.object.gtitle }}</a></h4>
 
-        {{item.object.id}}--{{item.object.gcontent|safe}}</li>
+{#        {{item.object.id}}--{{item.object.gcontent|safe}}</li>#}
 {%empty%}
     <li>啥也没找到</li>
 {%endfor%}
@@ -22,12 +25,12 @@
 {#						<a href="#" class="add_goods" title="加入购物车"></a>#}
 {#					</div>#}
 
-{%for pindex in page.paginator.page_range%}
-    {%if pindex == page.number%}
-        {{pindex}}&nbsp;&nbsp;
-    {%else%}
-        <a href="?q={{query}}&amp;page={{pindex}}">{{pindex}}</a>&nbsp;&nbsp;
-    {%endif%}
-{%endfor%}
+{#{%for pindex in page.paginator.page_range%}#}
+{#    {%if pindex == page.number%}#}
+{#        {{pindex}}&nbsp;&nbsp;#}
+{#    {%else%}#}
+{#        <a href="?q={{query}}&amp;page={{pindex}}">{{pindex}}</a>&nbsp;&nbsp;#}
+{#    {%endif%}#}
+{#{%endfor%}#}
 
 {% endblock body %}

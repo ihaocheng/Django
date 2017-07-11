@@ -128,5 +128,6 @@ def search(request, page):
     query = request.GET.get('q')
     paginator = Paginator(query, 10)
     page = paginator.page(page)
-    return render(request, 'search/search.html', {'page': page})
+    return render(request, 'search/search.html',
+                  {'page': page, 'title':'搜索结果','uname':'laoma'})
 
