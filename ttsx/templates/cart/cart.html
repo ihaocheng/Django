@@ -47,7 +47,13 @@
         });
 
         $(".checkbox").change(function () {
-            $(this).attr('checked',false);
+            if ($(this).attr('checked') == 'checked')
+            {
+                $(this).removeAttr('checked');
+            }
+            else {
+                $(this).attr('checked', true);
+            }
             total();
         });
         var all = 1;
