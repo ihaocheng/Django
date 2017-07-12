@@ -57,13 +57,13 @@
       <file leaf-file-name="cart.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/cart/cart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="749">
-              <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+            <state relative-caret-position="488">
+              <caret line="60" column="49" lean-forward="false" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
               <folding>
                 <element signature="e#938#1076#0#HTML" expanded="false" />
                 <element signature="e#1118#1326#0#HTML" expanded="false" />
                 <element signature="e#1366#1446#0#HTML" expanded="false" />
-                <element signature="e#1808#2023#0#HTML" expanded="false" />
+                <element signature="e#1994#2209#0#HTML" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1143,6 +1143,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="130" column="48" lean-forward="false" selection-start-line="130" selection-start-column="41" selection-end-line="130" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ttsx_cart/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -1154,23 +1162,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="130" column="48" lean-forward="false" selection-start-line="130" selection-start-column="41" selection-end-line="130" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/cart/cart.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="749">
-          <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+        <state relative-caret-position="488">
+          <caret line="60" column="49" lean-forward="false" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
           <folding>
             <element signature="e#938#1076#0#HTML" expanded="false" />
             <element signature="e#1118#1326#0#HTML" expanded="false" />
             <element signature="e#1366#1446#0#HTML" expanded="false" />
-            <element signature="e#1808#2023#0#HTML" expanded="false" />
+            <element signature="e#1994#2209#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>

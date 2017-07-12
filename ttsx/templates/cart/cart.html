@@ -50,9 +50,16 @@
             $(this).attr('checked',false);
             total();
         });
-
+        var all = 1;
         $(".checkall").click(function () {
-            $(".checkbox").attr('checked',false);
+            all *= -1;
+            if(all == -1) {
+                $(".checkbox").removeAttr('checked');
+            }
+            else
+            {
+              $(".checkbox").attr('checked', true);
+            }
             total();
         })
 
