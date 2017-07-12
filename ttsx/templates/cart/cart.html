@@ -46,19 +46,19 @@
             total();
         });
 
-        $(".checkbox").click(function () {
+        $(".checkbox").change(function () {
             $(this).attr('checked',false);
             total();
         });
         var all = 1;
-        $(".checkall").click(function () {
+        $(".checkall").change(function () {
             all *= -1;
             if(all == -1) {
                 $(".checkbox").removeAttr('checked');
             }
             else
             {
-              $(".checkbox").attr('checked', true);
+              $(".checkbox").attr('checked',true);
             }
             total();
         })
