@@ -18,16 +18,16 @@
 				"fast", function() {
 					$(".add_jump").fadeOut('fast',function(){
                         $(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'none'});
-						$('#show_count').html(2);
 					});
 
-            $.get('/cart/add/', {'nums': $(".num_show fl").val()}, function (data) {
+            $.get('/cart/add/', {'gid': {{ goods.id }},'count': $(".num_show").val() }, function (data) {
                     if (data.response == '1'){
-                        alert('购买成功')
                     }
                     else {
                       alert('购买失败')
                     }
+                    $('#show_count').html(data.cart_sum);
+
 
             })
 

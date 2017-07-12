@@ -8,6 +8,7 @@ from models import TypeInfo, GoodsInfo
 # Create your views here.
 def index(request):
     uname = request.session.get('uname')
+    cart_sum = request.session.get('cart_sum')
     tlist = TypeInfo.objects.all() #类型对象
 
     alist = []
@@ -16,14 +17,15 @@ def index(request):
         click_list = i.goodsinfo_set.order_by('-gclick')[:3]
         alist.append({'type':i, 'goods':goods_list, 'click':click_list})
 
-    context = {'uname':uname, 'title':'首页', 'alist':alist}
+    context = {'uname':uname, 'title':'首页', 'alist':alist , 'cart_sum':cart_sum}
     return render(request, 'goods/index.html', context)
 
 def goods_list(request, tid, pindex):
     if not pindex:  # 分页索引值，默认为1
         pindex = 1
     uname = request.session.get('uname') # 模板中js代码判断登陆状态
-    context = {'uname':uname, 'title':'商品列表'}
+    cart_sum = request.session.get('cart_sum')
+    context = {'uname':uname, 'title':'商品列表' , 'cart_sum':cart_sum}
 
     # tag = request.session.get('tag') # 使用session传参
     # tag = request.GET.get('tag') # 使用地址栏参数传参
@@ -87,7 +89,7 @@ def goods_list(request, tid, pindex):
 
 def detail(request, tid, gid):
     uname = request.session.get('uname')
-
+    cart_sum = request.session.get('cart_sum')
 
     if tid == '0':
         new_goods = GoodsInfo.objects.all().order_by('-id')[:2]
@@ -100,7 +102,7 @@ def detail(request, tid, gid):
     goods.save()
 
     context = {'uname':uname, 'title':'商品详细信息',
-               'new_goods':new_goods, 'goods':goods}
+               'new_goods':new_goods, 'goods':goods, 'cart_sum':cart_sum}
 
     gid_str = request.COOKIES.get('glance','')
     gid_list = gid_str.split(',')

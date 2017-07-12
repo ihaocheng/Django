@@ -58,7 +58,9 @@ def login_check(request):
         upwd_sha1 = s1.hexdigest()
 
         if ulist[0].upwd == upwd_sha1:
+            uid = ulist[0].id
             request.session['uname'] = uname
+            request.session['uid'] = uid
             url = request.session.get('url_path','/')
             response =  redirect(url)
             if post.get('checkbox') == 'on':
@@ -98,7 +100,9 @@ def logout(request):
 @decorator.islogin
 def center_info(request):
     uname = request.session.get('uname')
-    context = {'title': '用户中心', 'uname':uname}
+    cart_sum = request.session.get('cart_sum')
+
+    context = {'title': '用户中心', 'uname':uname , 'cart_sum':cart_sum}
     if uname:
         user = UserInfo.objects.filter(uname=uname)
         context['user'] = user[0]
@@ -116,15 +120,19 @@ def center_info(request):
 @decorator.islogin
 def center_order(request):
     uname = request.session.get('uname')
-    context = {'title':'订单', 'uname':uname}
+    cart_sum = request.session.get('cart_sum')
+
+    context = {'title':'订单', 'uname':uname, 'cart_sum':cart_sum}
     return render(request, 'user/user_center_order.html', context)
 
 @decorator.islogin
 def center_site(request):
     uname = request.session.get('uname')
+    cart_sum = request.session.get('cart_sum')
+
     user = UserInfo.objects.filter(uname=uname)[0]
 
-    context = {'title': '收货地址', 'uname':uname, 'user':user}
+    context = {'title': '收货地址', 'uname':uname, 'user':user, 'cart_sum':cart_sum}
     return render(request, 'user/user_center_site.html', context)
 
 def site_set(request):
