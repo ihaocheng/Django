@@ -4,6 +4,9 @@ from models import UserInfo
 from ttsx_goods.models import GoodsInfo
 from hashlib import sha1
 from django.http import JsonResponse, HttpResponse
+from ttsx_cart.models import CartInfo
+from django.db.models import Sum
+
 # Create your views here.
 from ttsx import decorator
 def register(request):
@@ -61,6 +64,8 @@ def login_check(request):
             uid = ulist[0].id
             request.session['uname'] = uname
             request.session['uid'] = uid
+            cart_sum = CartInfo.objects.filter(user=int(uid)).aggregate(Sum('count'))
+            request.session['cart_sum'] = cart_sum['count__sum']
             url = request.session.get('url_path','/')
             response =  redirect(url)
             if post.get('checkbox') == 'on':

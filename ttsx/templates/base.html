@@ -54,7 +54,7 @@
 			<input type="submit" class="input_btn fr" value="搜索">
             </form>
         </div>
-        {% if cart != '0' %}
+        {% if cart_tag != '0' %}
         <div class="guest_cart fr">
             <a href="/cart/" class="cart_name fl">我的购物车</a>
             <div class="goods_count fl" id="show_count">{{ cart_sum|default:0 }}</div>

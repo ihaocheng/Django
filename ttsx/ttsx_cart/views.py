@@ -4,16 +4,18 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from models import CartInfo
 from django.db.models import Sum
+from ttsx.decorator import islogin
 
 # Create your views here.
 
+@islogin
 def index(request):
     uname = request.session.get('uname')
     cart_sum = request.session.get('cart_sum')
     print(cart_sum)
     cart = CartInfo.objects.filter(user__uname=uname)
 
-    context = {'uname':uname, 'cart': cart, 'cart_sum':cart_sum}
+    context = {'uname':uname, 'cart': cart, 'cart_sum':cart_sum, 'cart_tag':'0'}
     return render(request, 'cart/cart.html', context)
 
 def add(request):
