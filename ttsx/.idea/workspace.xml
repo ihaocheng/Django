@@ -57,9 +57,14 @@
       <file leaf-file-name="cart.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/cart/cart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-              <folding />
+            <state relative-caret-position="749">
+              <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+              <folding>
+                <element signature="e#938#1076#0#HTML" expanded="false" />
+                <element signature="e#1118#1326#0#HTML" expanded="false" />
+                <element signature="e#1366#1446#0#HTML" expanded="false" />
+                <element signature="e#1808#2023#0#HTML" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,6 +107,9 @@
       <find>3f3</find>
       <find>000</find>
       <find>size</find>
+      <find>小计</find>
+      <find>num_show</find>
+      <find>checkbo</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -1127,14 +1135,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="110" column="17" lean-forward="false" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -1154,11 +1154,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="130" column="48" lean-forward="false" selection-start-line="130" selection-start-column="41" selection-end-line="130" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/cart/cart.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="749">
+          <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+          <folding>
+            <element signature="e#938#1076#0#HTML" expanded="false" />
+            <element signature="e#1118#1326#0#HTML" expanded="false" />
+            <element signature="e#1366#1446#0#HTML" expanded="false" />
+            <element signature="e#1808#2023#0#HTML" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
