@@ -6,7 +6,7 @@
         var total_all = 0;
         var count_sum = 0;
         $(".cart_list_td").each(function () {
-            if ($(this).find(".checkbox").attr('checked') == 'checked') {
+            if ($(this).find(".checkbox").prop('checked')) {
                 var price = $(this).children(".col05").text();
                 var count = $(this).children(".col06").find('.num_show').val();
                 count_sum += parseInt(count);
@@ -47,27 +47,15 @@
         });
 
         $(".checkbox").change(function () {
-            if ($(this).attr('checked') == 'checked')
-            {
-                $(this).removeAttr('checked');
-            }
-            else {
-                $(this).attr('checked', true);
-            }
+            var checked = $(this).prop('checked');
+            $(this).prop('checked',checked);
             total();
         });
-        var all = 1;
         $(".checkall").change(function () {
-            all *= -1;
-            if(all == -1) {
-                $(".checkbox").removeAttr('checked');
-            }
-            else
-            {
-              $(".checkbox").attr('checked',true);
-            }
+            var checked = $(this).prop('checked');
+            $('.checkbox').prop('checked',checked);
             total();
-        })
+        });
 
     })
 
