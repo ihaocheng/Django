@@ -24,18 +24,29 @@ def add(request):
         uname = request.session.get('uname')
         gid = request.GET.get('gid')
         count = request.GET.get('count')
-
-        cart = CartInfo.objects.filter(user__uname=uname , goods=int(gid))
-        print (cart)
-        if cart:
-            cart[0].count += int(count)
-            cart[0].save()
+        edit = request.GET.get('edit')
+        print(gid, edit, count)
+        cart1 = CartInfo.objects.filter(user__uname=uname , goods=int(gid))
+        print (cart1)
+        if cart1 and count:
+            cart1[0].count += int(count)
+            cart1[0].save()
+            count = cart1[0].count
+        elif edit:
+            cart1[0].count = int(edit)
+            cart1[0].save()
+            count = cart1[0].count
         else:
-            cart = CartInfo()
-            cart.user_id = int(uid)
-            cart.goods_id = int(gid)
-            cart.count = int(count)
-            cart.save()
+            try:
+                cart = CartInfo()
+                cart.user_id = int(uid)
+                cart.goods_id = int(gid)
+                cart.count = int(count)
+                cart.save()
+                count = cart.count
+            except:
+                count = cart1[0].count
+                print(count)
 
         carts = CartInfo.objects.filter(user__uname=uname)
         cart_sum = carts.aggregate(Sum('count')).get('count__sum')
@@ -44,7 +55,7 @@ def add(request):
 
         cart_sum = request.session.get('cart_sum')
 
-        return JsonResponse({'response':'1', 'cart_sum': cart_sum})
+        return JsonResponse({'response':'1', 'cart_sum': cart_sum, "count":count})
     except Exception as error:
         print (error)
         cart_sum = request.session.get('cart_sum')

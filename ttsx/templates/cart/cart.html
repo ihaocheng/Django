@@ -2,6 +2,15 @@
 
 {% block head %}
     <script>
+    function checkall() {
+
+            if($(":checkbox:not(.checkall)").length==$(":checked:not(.checkall)").length){
+                $(".checkall").prop('checked',true);
+            }else{
+                $(".checkall").prop('checked',false);
+            }
+        }
+
     function total() {
         var total_all = 0;
         var count_sum = 0;
@@ -20,12 +29,24 @@
         $(".total_count").children("em").text(count_sum);
     }
 
+    function edit(gid, count) {
+                $.get("/cart/add/",{'gid':gid,'edit':count},function (data) {
+                if(data.response == '0'){
+                    alert('购买失败');
+                }
+                $(this).next().val(data.count);
+            });
+                total();
+            }
+
     $(function () {
+        $.ajaxSetup({async:false});
         total();
 
         $(".add").click(function () {
             var count = $(this).next().val();
             count++;
+            edit($(this).parents().siblings(".col01").children().prop('name'),count);
             $(this).next().val(count);
             total();
         });
@@ -36,10 +57,26 @@
             if (count < 1){
                 count = 1;
             }
+            edit($(this).parents().siblings(".col01").children().prop('name'),count);
+
             $(this).prev().val(count);
             total();
 
         });
+
+        $(".num_show").blur(function () {
+            var count = $(this).val();
+            if(isNaN(count)){
+                $.get('/cart/add/',{'gid':$(this).parents().siblings(".col01").children().prop('name')},
+                function (data) {
+                    count = data.count;
+                });
+            }
+            edit($(this).parents().siblings(".col01").children().prop('name'),count);
+            $(this).val(count);
+            total();
+        });
+
 
         $(".del").click(function () {
             $(this).parent().parent().remove();
@@ -50,12 +87,17 @@
             var checked = $(this).prop('checked');
             $(this).prop('checked',checked);
             total();
+            checkall();
+
         });
         $(".checkall").change(function () {
             var checked = $(this).prop('checked');
             $('.checkbox').prop('checked',checked);
             total();
         });
+
+
+
 
     })
 
@@ -77,7 +119,7 @@
 	</ul>
     {% for c in cart %}
 	<ul class="cart_list_td clearfix">
-		<li class="col01"><input type="checkbox" checked="" class="checkbox"></li>
+		<li class="col01"><input type="checkbox" checked="" class="checkbox" name="{{ c.goods.id }}"></li>
 		<li class="col02"><img src="/static/{{ c.goods.gpic }}"></li>
 		<li class="col03">{{ c.goods.gtitle }}<br><em>{{ c.goods.gprice }}元/{{ c.goods.gunit }}</em></li>
 		<li class="col04">{{ c.goods.gunit }}</li>
@@ -86,7 +128,7 @@
 			<div class="num_add">
 				<a href="javascript:;" class="add fl">+</a>
 				<input type="text" class="num_show fl" value="{{ c.count }}">
-				<a href="javascript:;" class="minus fl">-</a>	
+				<a href="javascript:;" class="minus fl">-</a>
 			</div>
 		</li>
 		<li class="col07">25.80元</li>
