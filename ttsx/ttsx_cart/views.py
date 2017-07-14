@@ -9,7 +9,7 @@ from ttsx.decorator import islogin
 # Create your views here.
 
 @islogin
-def index(request):
+def cart(request):
     uname = request.session.get('uname')
     cart_sum = request.session.get('cart_sum')
     print(cart_sum)
@@ -65,6 +65,10 @@ def add(request):
         cart_sum = request.session.get('cart_sum')
         return JsonResponse({'response':'0', 'cart_sum':cart_sum})
 
+@islogin
 def place_order(request):
-    context = {'titel':'确认订单', 'top':'0'}
+    uname = request.session.get('uname')
+    cart_sum = request.session.get('cart_sum')
+
+    context = {'title':'确认订单', 'uname':uname, 'cart_sum':cart_sum}
     return render(request,'cart/place_order.html',context)
