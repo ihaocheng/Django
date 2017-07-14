@@ -29,13 +29,17 @@ def add(request):
         cart1 = CartInfo.objects.filter(user__uname=uname , goods=int(gid))
         print (cart1)
         if cart1 and count:
+            if cart1[0].goods.gstore < cart1[0].count + int(count):
+                return JsonResponse({'response':'2'})
             cart1[0].count += int(count)
             cart1[0].save()
             count = cart1[0].count
-        elif edit:
+        elif edit and edit != '-1':
             cart1[0].count = int(edit)
             cart1[0].save()
             count = cart1[0].count
+        elif edit == '-1':
+            cart1[0].delete()
         else:
             try:
                 cart = CartInfo()
