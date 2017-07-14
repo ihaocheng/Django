@@ -64,3 +64,7 @@ def add(request):
         print (error)
         cart_sum = request.session.get('cart_sum')
         return JsonResponse({'response':'0', 'cart_sum':cart_sum})
+
+def place_order(request):
+    context = {'titel':'确认订单', 'top':'0'}
+    return render(request,'cart/place_order.html',context)
