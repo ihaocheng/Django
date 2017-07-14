@@ -12,7 +12,6 @@ from ttsx.decorator import islogin
 def cart(request):
     uname = request.session.get('uname')
     cart_sum = request.session.get('cart_sum')
-    print(cart_sum)
     cart = CartInfo.objects.filter(user__uname=uname)
 
     context = {'uname':uname, 'cart': cart, 'cart_sum':cart_sum, 'cart_tag':'0'}
@@ -25,9 +24,7 @@ def add(request):
         gid = request.GET.get('gid')
         count = request.GET.get('count')
         edit = request.GET.get('edit')
-        print(gid, edit, count)
         cart1 = CartInfo.objects.filter(user__uname=uname , goods=int(gid))
-        print (cart1)
         if cart1 and count:
             if cart1[0].goods.gstore < cart1[0].count + int(count):
                 return JsonResponse({'response':'2'})
@@ -50,7 +47,6 @@ def add(request):
                 count = cart.count
             except:
                 count = cart1[0].count
-                print(count)
 
         carts = CartInfo.objects.filter(user__uname=uname)
         cart_sum = carts.aggregate(Sum('count')).get('count__sum')
@@ -68,7 +64,19 @@ def add(request):
 @islogin
 def place_order(request):
     uname = request.session.get('uname')
+    uid = request.session.get('uid')
     cart_sum = request.session.get('cart_sum')
 
-    context = {'title':'确认订单', 'uname':uname, 'cart_sum':cart_sum}
+    gid_list = request.POST.getlist('gid_list')
+    cart1 =CartInfo.objects.filter(goods__in=gid_list, user=uid)
+    print(cart1)
+    user = cart1[0].user
+    print user
+
+
+
+
+
+    context = {'title':'确认订单', 'uname':uname, 'cart_sum':cart_sum,
+               'user':user, 'cart':cart1}
     return render(request,'cart/place_order.html',context)
