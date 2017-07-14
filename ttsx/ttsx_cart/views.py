@@ -69,13 +69,7 @@ def place_order(request):
 
     gid_list = request.POST.getlist('gid_list')
     cart1 =CartInfo.objects.filter(goods__in=gid_list, user=uid)
-    print(cart1)
     user = cart1[0].user
-    print user
-
-
-
-
 
     context = {'title':'确认订单', 'uname':uname, 'cart_sum':cart_sum,
                'user':user, 'cart':cart1}

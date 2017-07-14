@@ -18,6 +18,7 @@ from django.contrib import admin
 import ttsx_user.urls
 import ttsx_goods.urls
 import ttsx_cart.urls
+import ttsx_order.urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -26,5 +27,6 @@ urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^search/', include('haystack.urls')),
     url(r'^cart/', include(ttsx_cart.urls)),
+    url(r'^order/', include(ttsx_order.urls)),
 
 ]

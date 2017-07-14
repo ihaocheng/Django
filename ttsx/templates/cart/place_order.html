@@ -1,5 +1,32 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    <script>
+    $(function () {
+
+{#'csrfmiddlewaretoken': $('#order_btn').val()#}
+
+        $('#order_btn').click(function () {
+            var order_dict = {'cart':''};
+            $.get("/order/", order_dict, function (data) {
+
+            })
+        });
+
+
+
+
+
+
+
+
+    })
+
+
+    </script>
+
+{% endblock head %}
+
 {% block body %}
 
 	<h3 class="common_title">确认收货地址</h3>
@@ -62,21 +89,26 @@
 
 	<div class="order_submit clearfix">
 		<a href="javascript:;" id="order_btn">提交订单</a>
-	</div>	
+	</div>
 
 
+    <div class="popup_con">
+		<div class="popup">
+			<p>订单提交成功！</p>
+		</div>
 
-
+		<div class="mask"></div>
+	</div>
 
 	<script type="text/javascript">
 		$('#order_btn').click(function() {
-			localStorage.setItem('order_finish',2);
+{#			localStorage.setItem('order_finish',2);#}
 
 			$('.popup_con').fadeIn('fast', function() {
 
 				setTimeout(function(){
 					$('.popup_con').fadeOut('fast',function(){
-						window.location.href = 'goods/index.html';
+						//window.location.href = '/';
 					});	
 				},3000)
 				
