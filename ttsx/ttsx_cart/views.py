@@ -66,10 +66,10 @@ def place_order(request):
     uname = request.session.get('uname')
     cart_sum = request.session.get('cart_sum')
 
-    cart_list = request.POST.getlist('cart_list')
-    cart1 =CartInfo.objects.filter(id__in=cart_list)
+    g_list = request.POST.getlist('g_list')
+    cart1 =CartInfo.objects.filter(goods__in=g_list, user__uname=uname)
     user = cart1[0].user
 
     context = {'title':'确认订单', 'uname':uname, 'cart_sum':cart_sum,
-               'user':user, 'cart':cart1, 'cartids':','.join(cart_list)}
+               'user':user, 'cart':cart1, 'gids':','.join(g_list)}
     return render(request,'cart/place_order.html',context)

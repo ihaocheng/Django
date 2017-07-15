@@ -6,7 +6,8 @@ from hashlib import sha1
 from django.http import JsonResponse, HttpResponse
 from ttsx_cart.models import CartInfo
 from django.db.models import Sum
-from ttsx_order.models import OrderDetail
+from ttsx_order.models import OrderMain
+from django.core.paginator import Paginator
 
 # Create your views here.
 from ttsx import decorator
@@ -126,12 +127,15 @@ def center_info(request):
 @decorator.islogin
 def center_order(request):
     uname = request.session.get('uname')
+    uid = request.session.get('uid')
     cart_sum = request.session.get('cart_sum')
 
-
-
-
-    context = {'title':'订单', 'uname':uname, 'cart_sum':cart_sum}
+    order_list = OrderMain.objects.filter(user=int(uid)).order_by('-orderid')
+    paginator = Paginator(order_list, 3)
+    page = paginator.page(1)
+    plist = paginator.page_range
+    context = {'title':'订单', 'uname':uname, 'cart_sum':cart_sum,
+               'page':page, 'plist':plist}
     return render(request, 'user/user_center_order.html', context)
 
 @decorator.islogin
