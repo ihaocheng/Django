@@ -2,26 +2,36 @@
 
 {% block head %}
     <script>
+    function orderdo() {
+            {#			localStorage.setItem('order_finish',2);#}
+
+            $('.popup_con').fadeIn('fast', function () {
+
+                setTimeout(function () {
+                    $('.popup_con').fadeOut('fast', function () {
+                        window.location.href = '/user/center_order/';
+                    });
+                }, 3000)
+
+            });
+        }
+
     $(function () {
 
-{#'csrfmiddlewaretoken': $('#order_btn').val()#}
-
         $('#order_btn').click(function () {
-            var order_dict = {'cart':''};
-            $.get("/order/", order_dict, function (data) {
-
+            $.post("/order/", {"cartids":"{{cartids}}", 'csrfmiddlewaretoken':'{{ csrf_token }}'},function (data) {
+                if (data.result == 1){
+                    orderdo();
+                }
+                else{
+                    alert('下单失败');
+                }
             })
         });
 
 
 
-
-
-
-
-
     })
-
 
     </script>
 
@@ -89,6 +99,7 @@
 
 	<div class="order_submit clearfix">
 		<a href="javascript:;" id="order_btn">提交订单</a>
+    {% csrf_token %}
 	</div>
 
 
@@ -99,21 +110,4 @@
 
 		<div class="mask"></div>
 	</div>
-
-	<script type="text/javascript">
-		$('#order_btn').click(function() {
-{#			localStorage.setItem('order_finish',2);#}
-
-			$('.popup_con').fadeIn('fast', function() {
-
-				setTimeout(function(){
-					$('.popup_con').fadeOut('fast',function(){
-						//window.location.href = '/';
-					});	
-				},3000)
-				
-			});
-		});
-	</script>
-
 {% endblock body %}

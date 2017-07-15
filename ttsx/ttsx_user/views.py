@@ -6,6 +6,7 @@ from hashlib import sha1
 from django.http import JsonResponse, HttpResponse
 from ttsx_cart.models import CartInfo
 from django.db.models import Sum
+from ttsx_order.models import OrderDetail
 
 # Create your views here.
 from ttsx import decorator
@@ -126,6 +127,9 @@ def center_info(request):
 def center_order(request):
     uname = request.session.get('uname')
     cart_sum = request.session.get('cart_sum')
+
+
+
 
     context = {'title':'订单', 'uname':uname, 'cart_sum':cart_sum}
     return render(request, 'user/user_center_order.html', context)

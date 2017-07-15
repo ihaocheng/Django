@@ -64,13 +64,12 @@ def add(request):
 @islogin
 def place_order(request):
     uname = request.session.get('uname')
-    uid = request.session.get('uid')
     cart_sum = request.session.get('cart_sum')
 
-    gid_list = request.POST.getlist('gid_list')
-    cart1 =CartInfo.objects.filter(goods__in=gid_list, user=uid)
+    cart_list = request.POST.getlist('cart_list')
+    cart1 =CartInfo.objects.filter(id__in=cart_list)
     user = cart1[0].user
 
     context = {'title':'确认订单', 'uname':uname, 'cart_sum':cart_sum,
-               'user':user, 'cart':cart1}
+               'user':user, 'cart':cart1, 'cartids':','.join(cart_list)}
     return render(request,'cart/place_order.html',context)

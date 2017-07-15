@@ -161,7 +161,7 @@
         <form action="/cart/place_order/" method="post">
         {% csrf_token %}
 	<ul class="cart_list_td clearfix">
-		<li class="col01"><input type="checkbox" checked="" class="checkbox" value="{{ c.goods.id }}" name="gid_list"></li>
+		<li class="col01"><input type="checkbox" checked="" class="checkbox" value="{{ c.id }}" name="cart_list"></li>
 		<li class="col02"><img src="/static/{{ c.goods.gpic }}"></li>
 		<li class="col03">{{ c.goods.gtitle }}<br><em>{{ c.goods.gprice }}元/{{ c.goods.gunit }}</em>
             <em>库存:</em><em>{{ c.goods.gstore }}</em></li>
